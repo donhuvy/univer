@@ -121,3 +121,4 @@ typedoc.json
 **/tsx-0
 
 .pnpm-store
+/bkit-sheets/src-tauri/target

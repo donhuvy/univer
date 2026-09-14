@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BKIT Office - BKIT.VN</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- BKIT Top Navigation & Office Switcher -->
+      <header id="bkit-header">
+        <div class="header-left">
+          <div class="logo-wrap" title="BKIT Office - Bộ ứng dụng văn phòng doanh nghiệp">
+            <span class="icon-b-badge">B</span>
+            <span class="brand-text">BKIT<span class="brand-domain">.VN</span></span>
+            <span class="product-badge">OFFICE</span>
+          </div>
+
+          <span class="divider">|</span>
+
+          <!-- Office-style File Tab -->
+          <div class="menu-file-container">
+            <button id="btn-menu-file" class="btn-file-tab">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Tệp
+            </button>
+            <div id="menu-file-dropdown" class="menu-dropdown hidden">
+              <button id="action-new" class="dropdown-item">
+                <span class="item-icon">📄</span>
+                <span>Tạo tài liệu mới</span>
+                <span class="item-shortcut">Ctrl+N</span>
+              </button>
+              <button id="action-open" class="dropdown-item">
+                <span class="item-icon">📂</span>
+                <span>Mở tệp (.xlsx, .csv, .json)...</span>
+                <span class="item-shortcut">Ctrl+O</span>
+              </button>
+              <button id="action-save" class="dropdown-item">
+                <span class="item-icon">💾</span>
+                <span>Lưu dự án (.bkit.json)</span>
+                <span class="item-shortcut">Ctrl+S</span>
+              </button>
+              <hr class="dropdown-divider" />
+              <button id="action-export-xlsx" class="dropdown-item">
+                <span class="item-icon">📊</span>
+                <span>Xuất file Excel (.xlsx)</span>
+              </button>
+              <button id="action-export-csv" class="dropdown-item">
+                <span class="item-icon">📑</span>
+                <span>Xuất file CSV (.csv)</span>
+              </button>
+              <hr class="dropdown-divider" />
+              <button id="action-templates" class="dropdown-item">
+                <span class="item-icon">📑</span>
+                <span>Thư viện mẫu biểu doanh nghiệp...</span>
+              </button>
+              <button id="action-print" class="dropdown-item">
+                <span class="item-icon">🖨️</span>
+                <span>In ấn tài liệu</span>
+                <span class="item-shortcut">Ctrl+P</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4-in-1 App Mode Switcher Tabs -->
+          <nav class="app-switcher-tabs">
+            <button id="tab-sheets" class="switcher-btn active" title="Bảng tính thông minh">
+              <span class="tab-icon">📊</span>
+              <span>Bảng tính</span>
+            </button>
+            <button id="tab-docs" class="switcher-btn" title="Soạn thảo văn bản">
+              <span class="tab-icon">📝</span>
+              <span>Văn bản</span>
+            </button>
+            <button id="tab-slides" class="switcher-btn" title="Trình chiếu thuyết trình">
+              <span class="tab-icon">📽️</span>
+              <span>Trình chiếu</span>
+            </button>
+            <button id="tab-pdf" class="switcher-btn" title="Chỉnh sửa & Ký số PDF">
+              <span class="tab-icon">📑</span>
+              <span>Ký & Sửa PDF</span>
+            </button>
+          </nav>
+
+          <span class="divider">|</span>
+          <span class="doc-title" id="doc-title">BKIT Sheets - Bảng tính mới</span>
+        </div>
+        
+        <div class="header-right">
+          <!-- Vietnamese Business Tools Button -->
+          <button id="btn-vi-tools" class="btn-header-tool" title="Tiện ích văn phòng Việt Nam: Đọc số thành chữ, chuyển đổi font/hoa thường">
+            <span>🇻🇳</span>
+            <span>Tiện ích VN</span>
+          </button>
+
+          <!-- Templates Button -->
+          <button id="btn-open-templates" class="btn-header-tool" title="Thư viện Biểu mẫu Doanh nghiệp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            Mẫu biểu
+          </button>
+
+          <!-- Shortcuts Button -->
+          <button id="btn-shortcuts" class="btn-icon" title="Bảng tra cứu phím tắt (F1)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+              <line x1="6" y1="8" x2="6.01" y2="8"></line>
+              <line x1="10" y1="8" x2="10.01" y2="8"></line>
+              <line x1="14" y1="8" x2="14.01" y2="8"></line>
+              <line x1="18" y1="8" x2="18.01" y2="8"></line>
+              <line x1="6" y1="12" x2="6.01" y2="12"></line>
+              <line x1="18" y1="12" x2="18.01" y2="12"></line>
+              <line x1="10" y1="16" x2="14" y2="16"></line>
+            </svg>
+          </button>
+
+          <!-- Dark/Light Mode Toggle -->
+          <button id="btn-theme-toggle" class="btn-icon" title="Bật/Tắt chế độ ban đêm">
+            <svg id="icon-theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- License Status Badge -->
+          <button id="btn-license" class="btn-status unactivated">
+            <span class="status-dot"></span>
+            <span id="license-label">Bản quyền: Đang kiểm tra...</span>
+          </button>
+
+          <!-- About Modal Button -->
+          <button id="btn-about" class="btn-icon" title="Giới thiệu & Giấy phép">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Workspace Container (Univer Canvas for Sheets, Docs, Slides) -->
+      <main id="sheet-container"></main>
+
+      <!-- Dedicated PDF Editor Workspace -->
+      <div id="container-pdf" class="pdf-workspace hidden">
+        <!-- PDF Toolbar -->
+        <div class="pdf-toolbar">
+          <div class="pdf-tools-left">
+            <input type="file" id="input-pdf-file" accept=".pdf" class="hidden" />
+            <input type="file" id="input-sig-image" accept="image/png,image/jpeg" class="hidden" />
+            
+            <button id="btn-open-pdf" class="btn-pdf-action">
+              <span>📂</span> Mở file PDF
+            </button>
+            <button id="btn-new-blank-pdf" class="btn-pdf-action">
+              <span>📄</span> Tạo PDF mới
+            </button>
+            <span class="pdf-divider">|</span>
+            <button id="btn-pdf-sign" class="btn-pdf-action highlight">
+              <span>🖋️</span> Vẽ ký tay
+            </button>
+            <button id="btn-upload-sig-img" class="btn-pdf-action">
+              <span>🖼️</span> Chèn ảnh chữ ký/dấu
+            </button>
+            <button id="btn-pdf-stamp" class="btn-pdf-action stamp">
+              <span>🔴</span> Đóng dấu mộc đỏ
+            </button>
+            <button id="btn-pdf-text" class="btn-pdf-action">
+              <span>📝</span> Ghi chú văn bản
+            </button>
+            <button id="btn-pdf-rotate" class="btn-pdf-action">
+              <span>🔄</span> Xoay trang 90°
+            </button>
+          </div>
+          <div class="pdf-tools-right">
+            <span id="pdf-info-text" class="pdf-info">Chưa chọn tệp</span>
+            <button id="btn-export-pdf" class="btn-primary small">
+              <span>💾</span> Xuất tệp PDF đã ký
+            </button>
+          </div>
+        </div>
+
+        <!-- PDF Content View -->
+        <div class="pdf-view-area">
+          <div id="pdf-empty-view" class="pdf-dropzone">
+            <div class="dropzone-content">
+              <span class="dropzone-icon">📑</span>
+              <h3>Kéo & thả file PDF vào đây để bắt đầu</h3>
+              <p>Hỗ trợ xem, ký tên số, đóng dấu mộc đỏ công ty (ĐÃ DUYỆT, ĐÃ THU TIỀN, MẬT), chèn ghi chú và xoay trang</p>
+              <div class="dropzone-actions">
+                <button onclick="document.getElementById('input-pdf-file').click()" class="btn-primary">
+                  Chọn tệp PDF từ máy tính
+                </button>
+                <button id="btn-empty-blank" class="btn-outline">
+                  Tạo trang PDF trắng
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="pdf-active-view" class="pdf-frame-wrapper hidden">
+            <iframe id="pdf-preview-frame" title="Xem trước PDF"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Office Status Bar -->
+      <footer id="bkit-statusbar">
+        <div class="status-left">
+          <span class="status-indicator">●</span>
+          <span id="status-mode-text">Sẵn sàng</span>
+          <span class="status-sep">|</span>
+          <span id="status-info-text">BKIT Office v1.0.0 Pro • Tiêu chuẩn doanh nghiệp</span>
+        </div>
+        <div class="status-right">
+          <button id="btn-zoom-out" class="btn-zoom" title="Thu nhỏ (Ctrl -)">−</button>
+          <span id="zoom-val" class="zoom-val">100%</span>
+          <button id="btn-zoom-in" class="btn-zoom" title="Phóng to (Ctrl +)">+</button>
+          <button id="btn-zoom-reset" class="btn-zoom-reset" title="Khôi phục 100%">Đặt lại</button>
+        </div>
+      </footer>
+
+      <!-- Digital Signature Pad Modal -->
+      <div id="modal-signature" class="modal-backdrop hidden">
+        <div class="modal-card sig-card">
+          <div class="modal-header">
+            <h3>Tạo chữ ký điện tử / Ký tay</h3>
+            <button id="btn-close-sig" class="btn-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p class="subtitle">Dùng chuột hoặc bút cảm ứng để vẽ chữ ký của bạn vào khung bên dưới:</p>
+            <div class="canvas-wrapper">
+              <canvas id="canvas-signature" width="460" height="180"></canvas>
+            </div>
+            <div class="sig-options">
+              <span class="sig-hint">Màu mực xanh ký chuẩn doanh nghiệp</span>
+              <button id="btn-clear-sig" class="btn-outline small">Xóa vẽ lại</button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="btn-cancel-sig" class="btn-outline" onclick="document.getElementById('modal-signature').classList.add('hidden')">Hủy</button>
+            <button id="btn-save-sig" class="btn-primary">Chèn chữ ký vào PDF</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vietnamese Business Tools Modal -->
+      <div id="modal-vi-tools" class="modal-backdrop hidden">
+        <div class="modal-card vi-tools-card">
+          <div class="modal-header">
+            <div>
+              <h3>Tiện Ích Văn Phòng Chuẩn Việt Nam 🇻🇳</h3>
+              <p class="subtitle">Bộ công cụ hỗ trợ kế toán, văn thư và hành chính chuyên nghiệp</p>
+            </div>
+            <button id="btn-close-vi-tools" class="btn-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <!-- Tool 1: Đọc số thành chữ -->
+            <div class="tool-section">
+              <div class="tool-header">
+                <span class="tool-icon">💰</span>
+                <h4>1. Đọc số tiền thành chữ (Kế toán & Hóa đơn)</h4>
+              </div>
+              <div class="tool-body">
+                <div class="form-group inline">
+                  <input type="text" id="input-vi-number" placeholder="Nhập số tiền (VD: 15500000 hoặc 1.250.000.000)" />
+                  <button id="btn-convert-number" class="btn-primary">Đọc thành chữ</button>
+                </div>
+                <div class="result-box">
+                  <label>Kết quả đọc số bằng chữ:</label>
+                  <div id="result-vi-words" class="result-text">Chưa có dữ liệu</div>
+                  <button id="btn-copy-words" class="btn-outline small">📋 Sao chép kết quả</button>
+                </div>
+              </div>
+            </div>
+
+            <hr class="tool-divider" />
+
+            <!-- Tool 2: Chuyển đổi kiểu chữ & Bỏ dấu -->
+            <div class="tool-section">
+              <div class="tool-header">
+                <span class="tool-icon">🔤</span>
+                <h4>2. Chuyển đổi kiểu chữ (Hoa / Thường / Bỏ dấu)</h4>
+              </div>
+              <div class="tool-body">
+                <textarea id="input-vi-text" rows="3" placeholder="Nhập hoặc dán văn bản cần chuyển đổi vào đây..."></textarea>
+                <div class="case-btn-group">
+                  <button id="btn-case-upper" class="btn-outline small">VIẾT HOA</button>
+                  <button id="btn-case-lower" class="btn-outline small">viết thường</button>
+                  <button id="btn-case-title" class="btn-outline small">Viết Hoa Đầu Từ</button>
+                  <button id="btn-case-noaccent" class="btn-outline small">Bỏ dấu tiếng Việt</button>
+                  <button id="btn-case-tcvn3" class="btn-outline small" title="Sửa lỗi font .VnTime / TCVN3">Sửa font TCVN3 → Unicode</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keyboard Shortcuts Modal -->
+      <div id="modal-shortcuts" class="modal-backdrop hidden">
+        <div class="modal-card shortcuts-card">
+          <div class="modal-header">
+            <div>
+              <h3>Bảng Phím Tắt Tiêu Chuẩn Văn Phòng ⌨️</h3>
+              <p class="subtitle">Thao tác nhanh chóng, chuyên nghiệp như Microsoft Office</p>
+            </div>
+            <button id="btn-close-shortcuts" class="btn-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="shortcuts-grid">
+              <div class="shortcut-item"><span class="key">Ctrl + N</span><span class="desc">Tạo tài liệu mới</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + O</span><span class="desc">Mở tệp Excel / Văn bản</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + S</span><span class="desc">Lưu tệp dự án</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + P</span><span class="desc">In ấn tài liệu</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + Z</span><span class="desc">Hoàn tác (Undo)</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + Y</span><span class="desc">Làm lại (Redo)</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + B</span><span class="desc">In đậm chữ (Bold)</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + I</span><span class="desc">In nghiêng chữ (Italic)</span></div>
+              <div class="shortcut-item"><span class="key">Ctrl + F</span><span class="desc">Tìm kiếm & Thay thế</span></div>
+              <div class="shortcut-item"><span class="key">F1</span><span class="desc">Mở bảng trợ giúp phím tắt</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Templates Modal -->
+      <div id="modal-templates" class="modal-backdrop hidden">
+        <div class="modal-card templates-card">
+          <div class="modal-header">
+            <div>
+              <h3>Thư viện Mẫu biểu Doanh nghiệp</h3>
+              <p class="subtitle">Chọn mẫu tài liệu dựng sẵn chuẩn quy chuẩn Việt Nam</p>
+            </div>
+            <button id="btn-close-templates" class="btn-close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div id="templates-grid" class="templates-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- License Activation Modal -->
+      <div id="modal-license" class="modal-backdrop hidden">
+        <div class="modal-card">
+          <div class="modal-header">
+            <div class="modal-brand">
+              <span class="icon-b-badge large">B</span>
+              <div>
+                <h3>Kích hoạt bản quyền BKIT Office</h3>
+                <p class="subtitle">Bộ ứng dụng văn phòng doanh nghiệp - BKIT.VN</p>
+              </div>
+            </div>
+            <button id="btn-close-license" class="btn-close">&times;</button>
+          </div>
+          
+          <div class="modal-body">
+            <div class="info-box">
+              <div class="info-row">
+                <span class="label">Mã định danh máy (Machine ID):</span>
+                <span id="disp-machine-id" class="code-val">Đang tải...</span>
+              </div>
+              <div class="info-row">
+                <span class="label">Trạng thái hiện tại:</span>
+                <span id="disp-license-status" class="status-val">Chưa kích hoạt</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-license-key">Nhập mã kích hoạt (License Key từ Lemon Squeezy):</label>
+              <input 
+                type="text" 
+                id="input-license-key" 
+                placeholder="VD: 7D4A2B9C-XXXX-XXXX-XXXX-XXXXXXXXXXXX" 
+                autocomplete="off" 
+                spellcheck="false"
+              />
+            </div>
+
+            <div id="license-message" class="msg-alert hidden"></div>
+          </div>
+
+          <div class="modal-footer">
+            <a 
+              href="https://bkit.vn/store/bkit-office" 
+              target="_blank" 
+              class="btn-secondary" 
+              id="btn-buy-license"
+            >
+              Mua bản quyền ngay
+            </a>
+            <div class="action-buttons">
+              <button id="btn-trial-continue" class="btn-outline">Dùng thử</button>
+              <button id="btn-submit-activate" class="btn-primary">Kích hoạt</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About / Legal Modal -->
+      <div id="modal-about" class="modal-backdrop hidden">
+        <div class="modal-card about-card">
+          <div class="modal-header">
+            <div class="modal-brand">
+              <span class="icon-b-badge large">B</span>
+              <div>
+                <h3>BKIT Office</h3>
+                <p class="subtitle">Phiên bản 1.0.0 Pro (Build 2026.09)</p>
+              </div>
+            </div>
+            <button id="btn-close-about" class="btn-close">&times;</button>
+          </div>
+          
+          <div class="modal-body legal-content">
+            <h4>Bản quyền sản phẩm</h4>
+            <p><strong>BKIT Office</strong> được phát triển và thương mại hóa bởi <strong>BKIT.VN</strong>.</p>
+            <p>Bộ ứng dụng văn phòng tích hợp 4-trong-1: <strong>Bảng tính (Sheets)</strong>, <strong>Soạn văn bản (Docs)</strong>, <strong>Trình chiếu (Slides)</strong> và <strong>Ký số/Chỉnh sửa PDF</strong>.</p>
+            <p>Website: <a href="https://bkit.vn" target="_blank">https://bkit.vn</a> | Hỗ trợ: support@bkit.vn</p>
+            
+            <hr />
+            
+            <h4>Ghi nhận Bản quyền Lõi (Third-Party Notices)</h4>
+            <p>Phần mềm này sử dụng lõi ứng dụng từ dự án mã nguồn mở <strong>Univer</strong>.</p>
+            <p><em>Copyright © 2023-present DreamNum Co., Ltd.</em></p>
+            <p>Được cấp phép theo <strong>Apache License, Version 2.0</strong> (cho phép sử dụng thương mại, đóng gói và tái phân phối hợp pháp).</p>
+            
+            <pre class="license-text">Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+          </div>
+
+          <div class="modal-footer right-only">
+            <button id="btn-confirm-about" class="btn-primary">Đã hiểu</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
